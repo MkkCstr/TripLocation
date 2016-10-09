@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Analyzer.cs" />
     <Compile Include="Model\Places.cs" />
     <Compile Include="Model\Review.cs" />
     <Compile Include="Model\TableInfo.cs" />

@@ -11,39 +11,49 @@ namespace TripLocation
 {
     class SentimentAnalysis
     {
-        public double getSentiment(string str)
+        public double getSentiment(string str, List<string> APIList)
         {
+          
             double result = 0;
             var client = new RestClient("http://api.meaningcloud.com/sentiment-2.1");
             var request = new RestRequest(Method.POST);
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
             request.AddHeader("Accept", "*/*");
-            request.AddParameter("application/x-www-form-urlencoded", "key=&lang=auto&txt="+str+"&model=general", ParameterType.RequestBody);
+            request.AddParameter("application/x-www-form-urlencoded", "key="+APIList[0]+"&lang=auto&txt="+str+"&model=general", ParameterType.RequestBody);
             var response = client.Execute(request);
 
             JToken token = JObject.Parse(response.Content);
-            string content = (string)token.SelectToken("score_tag");
-            switch (content)
+            string code = (string)token.SelectToken("status.code");
+            if (code == "100")
             {
-                case "P+":
-                    result = 5;
-                    break;
-                case "P":
-                    result = 4;
-                    break;
-                case "NEU":
-                    result = 3;
-                    break;
-                case "N":
-                    result = 2;
-                    break;
-                case "N+":
-                    result = 1;
-                    break;
-                case "NONE":
-                    result = 0;
-                    break;
+                APIList.RemoveAt(0);
             }
+            else
+            {
+                string content = (string)token.SelectToken("score_tag");
+                switch (content)
+                {
+                    case "P+":
+                        result = 5;
+                        break;
+                    case "P":
+                        result = 4;
+                        break;
+                    case "NEU":
+                        result = 3;
+                        break;
+                    case "N":
+                        result = 2;
+                        break;
+                    case "N+":
+                        result = 1;
+                        break;
+                    case "NONE":
+                        result = 0;
+                        break;
+                }
+            }
+            
             return result;
         }
     }

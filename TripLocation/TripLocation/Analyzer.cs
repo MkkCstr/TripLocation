@@ -10,9 +10,9 @@ namespace TripLocation
 {
     class Analyzer
     {
-        public Analyzer(string cs, string sqlPlace, string sqlReview)
+        public Analyzer(string cs, string sqlPlace, string sqlReview, List<string> APIList)
         {
-            HashSet<TableInfo> myTable = getTable(cs, sqlPlace, sqlReview);
+            HashSet<TableInfo> myTable = getTable(cs, sqlPlace, sqlReview,APIList);
             foreach(TableInfo info in myTable)
             {
 
@@ -44,7 +44,7 @@ namespace TripLocation
             return result;
         }
 
-        public HashSet<TableInfo> getTable2(string db, string sqlPlace, string sqlReview)
+        public HashSet<TableInfo> getTable(string db, string sqlPlace, string sqlReview, List<string> APIList)
         {
             TripDB tripdb = new TripDB();
             SentimentAnalysis sent = new SentimentAnalysis();
@@ -56,11 +56,20 @@ namespace TripLocation
                 string id = place.Id.ToString();
                 HashSet<Review> reviewSet = tripdb.getReviews(db, sqlReview, place.Id);
                 double note = 0;
+                int counter = 0;
                 foreach (Review review in reviewSet)
                 {
-                   note += sent.getSentiment(review.Reviewstr);
+                    if (APIList.Count > 0)
+                    {
+                        note += sent.getSentiment(review.Reviewstr, APIList);
+                        counter++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                double moyenne = note / (double)reviewSet.Count;
+                double moyenne = note / counter;
                 TableInfo temp = new TableInfo();
                 temp.Note = moyenne;
                 temp.Latitude = place.Latitude;

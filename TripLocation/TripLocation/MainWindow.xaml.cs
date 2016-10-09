@@ -32,13 +32,11 @@ namespace TripLocation
            string sqlPlace = "Select * FROM tripamst HAVING nbAvis > 1";
            string sqlReview = "Select * FROM tripreviewsamst HAVING note > 0 AND idplace = ";
            string cs = @"server=localhost;userid=root;password=;database=traitement";
-            SentimentAnalysis sent = new SentimentAnalysis();
-            string str = "I love this place, it's nice and clean";
-            double res = sent.getSentiment(str);
 
+           List<string> APIList = new List<string>();
+          
 
-
-            Analyzer analyzer = new Analyzer(cs,sqlPlace,sqlReview);
+           Analyzer analyzer = new Analyzer(cs,sqlPlace,sqlReview,APIList);
 
 
            

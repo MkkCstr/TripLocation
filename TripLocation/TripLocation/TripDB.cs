@@ -89,5 +89,39 @@ namespace TripLocation
             return result;
         }
 
+        public double getAVG(string db, string sqlAvg, int idplace)
+        {
+            double result = 0;
+            MySqlConnection conn = null;
+            MySqlCommand cmd = null;
+            MySqlDataReader reader = null;
+            string sql = sqlAvg + idplace.ToString();
+
+            try
+            {
+                conn = new MySqlConnection(db);
+                cmd = new MySqlCommand(sql, conn);
+
+                conn.Open();
+
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    result = reader.GetDouble(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message));
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (conn != null) conn.Close();
+            }
+            return result;
+
+        }
     }
 }

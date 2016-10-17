@@ -10,16 +10,12 @@ namespace TripLocation
 {
     class Analyzer
     {
-        public Analyzer(string cs, string sqlPlace, string sqlReview, List<string> APIList)
+        public Analyzer()
         {
-            HashSet<TableInfo> myTable = getTable(cs, sqlPlace, sqlReview,APIList);
-            foreach(TableInfo info in myTable)
-            {
-
-            }
+           
         }
 
-        public HashSet<TableInfo> getTable(string db, string sqlPlace, string sqlReview)
+        public HashSet<TableInfo> getTable(string db, string sqlPlace, string sqlAvg)
         {
             TripDB tripdb = new TripDB();
 
@@ -27,16 +23,10 @@ namespace TripLocation
             HashSet<Places> placeSet = tripdb.getPlaces(db, sqlPlace);
             Parallel.ForEach(placeSet, place =>
             {
-                string id = place.Id.ToString();
-                HashSet<Review> reviewSet = tripdb.getReviews(db, sqlReview, place.Id);
-                double note = 0;
-                foreach (Review review in reviewSet)
-                {
-                    note += (double)review.Note;
-                }
-                double moyenne = note / (double)reviewSet.Count;
+
+                double avg = tripdb.getAVG(db, sqlAvg, place.Id);
                 TableInfo temp = new TableInfo();
-                temp.Note = moyenne;
+                temp.Note = avg;
                 temp.Latitude = place.Latitude;
                 temp.Longitude = place.Longitude;
                 result.Add(temp);

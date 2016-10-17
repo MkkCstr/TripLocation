@@ -14,6 +14,18 @@ namespace TripLocation
     {
         public TripDB() { }
 
+        /// <summary>
+        /// Prendre tout les places depuis la base de donnée
+        /// </summary>
+        /// <param name="db">
+        /// paramètre de la base de données
+        /// </param>
+        /// <param name="sqlPlace">
+        /// La requête à exécuter
+        /// </param>
+        /// <returns>
+        /// Une table de place content le nom, son id et les coordonnées de la place
+        /// </returns>
         public HashSet<Places> getPlaces(string db, string sqlPlace)
         {
             HashSet<Places> result = new HashSet<Places>();
@@ -51,6 +63,21 @@ namespace TripLocation
             return result;
         }
 
+        /// <summary>
+        /// Prendre tout les reviews correspondant à une idplace
+        /// </summary>
+        /// <param name="db">
+        /// paramètre de la base de données
+        /// </param>
+        /// <param name="sqlReview">
+        /// la requete à exécuter pour prendre tous les places
+        /// </param>
+        /// <param name="idplace">
+        /// l'idplace à comparer
+        /// </param>
+        /// <returns>
+        /// Une liste d'avis qui contient la note et leur avis.
+        /// </returns>
         public HashSet<Review> getReviews(string db, string sqlReview, int idplace)
         {
             HashSet<Review> result = new HashSet<Review>();
@@ -89,6 +116,21 @@ namespace TripLocation
             return result;
         }
 
+        /// <summary>
+        /// Prendre la moyenne des notes des reviews selon la place
+        /// </summary>
+        /// <param name="db">
+        /// paramètre de la base de données
+        /// </param>
+        /// <param name="sqlAvg">
+        /// La requête pour avoir les notes.
+        /// </param>
+        /// <param name="idplace">
+        /// l'id de la place à comparer
+        /// </param>
+        /// <returns>
+        /// la moyenne des notes
+        /// </returns>
         public double getAVG(string db, string sqlAvg, int idplace)
         {
             double result = 0;

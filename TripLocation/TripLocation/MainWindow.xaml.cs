@@ -36,8 +36,8 @@ namespace TripLocation
             Analyzer analyzer = new Analyzer();
             HashSet<TableInfo> myTable = analyzer.getTable(cs, sqlPlace, sqlReview);
 
-            RnetInstance rnet = new RnetInstance(myTable);
-            rnet.runScript();
+            RnetInstance rnet = new RnetInstance();
+            rnet.runScript(myTable);
         }
 
         private void hashtableTest()

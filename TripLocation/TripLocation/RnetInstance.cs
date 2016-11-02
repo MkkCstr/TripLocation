@@ -26,9 +26,17 @@ namespace TripLocation
             });
 
             NumericMatrix myMatrix = engine.CreateNumericMatrix(myData);
+           // engine.Evaluate("install.packages(\"ape\")");
+            engine.Evaluate("library(\"ape\")");
             engine.SetSymbol("matrix", myMatrix);
 
             NumericMatrix toDist = engine.Evaluate("dist <- as.matrix(dist(matrix[,2:3]))").AsNumericMatrix();
+            NumericMatrix invDist = engine.Evaluate("invdist <- 1/dist").AsNumericMatrix();
+            engine.Evaluate("diag(invdist) <- 0").AsNumericMatrix();
+            invDist = engine.Evaluate("invdist").AsNumericMatrix();
+            NumericVector obs = engine.Evaluate("note <- as.vector(matrix[,1])").AsNumeric();
+            NumericMatrix moranI = engine.Evaluate("Moran.I(note, invdist)").AsNumericMatrix();
+            
             engine.Dispose();
         }
     }

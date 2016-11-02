@@ -30,12 +30,15 @@ namespace TripLocation
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            string sqlPlace = "Select * FROM tripamst HAVING nbAvis >= 1";
-            string sqlReview = "Select * FROM tripreviewsamst HAVING note > 0 AND idplace = ";
-            string cs = @"server=localhost;userid=root;password=;database=traitement";
-            Analyzer analyzer = new Analyzer();
-            HashSet<TableInfo> myTable = analyzer.getTable(cs, sqlPlace, sqlReview);
+            string sqlrequete = "Select avg(rev.note) as AVG, loc.longitude, loc.latitude"
++ " From tripreviewsamst as rev JOIN tripauteuramst as aut On rev.idauteur = aut.memberID JOIN tripamst as loc ON rev.idplace = loc.id"
++ " Where aut.location != \"\""
++ " Group by rev.idplace";
 
+            string cs = @"server=localhost;userid=root;password=;database=traitement2";
+            TripDB trip = new TripDB();
+            HashSet<TableInfo> myTable = trip.getTable(cs, sqlrequete);
+                
             RnetInstance rnet = new RnetInstance();
             rnet.runScript(myTable);
         }

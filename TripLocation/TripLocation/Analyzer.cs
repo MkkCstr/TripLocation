@@ -28,22 +28,12 @@ namespace TripLocation
         /// requête pour avoir la moyenne
         /// </param>
         /// <returns></returns>
-        public HashSet<TableInfo> getTable(string db, string sqlPlace, string sqlAvg)
+        public HashSet<TableInfo> getTable(string db, string requete)
         {
             TripDB tripdb = new TripDB();
 
             HashSet<TableInfo> result = new HashSet<TableInfo>();
-            HashSet<Places> placeSet = tripdb.getPlaces(db, sqlPlace);
-            Parallel.ForEach(placeSet, place =>
-            {
 
-                double avg = tripdb.getAVG(db, sqlAvg, place.Id);
-                TableInfo temp = new TableInfo();
-                temp.Note = avg;
-                temp.Latitude = place.Latitude;
-                temp.Longitude = place.Longitude;
-                result.Add(temp);
-            });
             return result;
         }
 

@@ -4,15 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TripLocation"
-        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Class="TripLocation.MainWindow"
-        mc:Ignorable="d"
+        x:Class="TripLocation.MainWindow"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Button x:Name="Start" Content="Button" HorizontalAlignment="Left" Height="30" Margin="420,28,0,0" VerticalAlignment="Top" Width="87" Click="Start_Click"/>
-        <Grid Margin="0,0,102,0"/>
-        <chartingToolkit:Chart  Name="lineChart" Title="Line Series Demo" VerticalAlignment="Top" Margin="33,611,440,0" Height="254">
-            <chartingToolkit:LineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True"/>
-        </chartingToolkit:Chart>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="40" Margin="420,63,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="87"/>
     </Grid>
 </Window>

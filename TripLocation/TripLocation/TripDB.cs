@@ -165,5 +165,43 @@ namespace TripLocation
             return result;
 
         }
+
+
+        public HashSet<TableInfo> getTable(string db, string requete)
+        {
+            HashSet<TableInfo> result = new HashSet<TableInfo>();
+            MySqlConnection conn = null;
+            MySqlCommand cmd = null;
+            MySqlDataReader reader = null;
+
+            try
+            {
+                conn = new MySqlConnection(db);
+                cmd = new MySqlCommand(requete, conn);
+
+                conn.Open();
+
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    TableInfo temp = new TableInfo();
+                    temp.Note = reader.GetDouble("AVG");
+                    temp.Latitude = reader.GetDouble("latitude");
+                    temp.Longitude = reader.GetDouble("longitude");
+                    result.Add(temp);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message));
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (conn != null) conn.Close();
+            }
+            return result;
+        }
     }
 }

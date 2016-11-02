@@ -30,16 +30,14 @@ namespace TripLocation
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            int a = 1;
-            int b = 2;
+            string sqlPlace = "Select * FROM tripamst HAVING nbAvis >= 1";
+            string sqlReview = "Select * FROM tripreviewsamst HAVING note > 0 AND idplace = ";
+            string cs = @"server=localhost;userid=root;password=;database=traitement";
+            Analyzer analyzer = new Analyzer();
+            HashSet<TableInfo> myTable = analyzer.getTable(cs, sqlPlace, sqlReview);
 
-            Microsoft.Scripting.Hosting.ScriptEngine py = Python.CreateEngine(); // allow us to run ironpython programs
-            Microsoft.Scripting.Hosting.ScriptScope s = py.CreateScope(); // you need this to get the variables
-            py.Execute("x = " + a + "+" + b, s); // this is your python program
-            int str = s.GetVariable("x");
-            textBlock.Text = str.ToString();
-            */
+            RnetInstance rnet = new RnetInstance(myTable);
+            rnet.runScript();
         }
 
         private void hashtableTest()

@@ -140,6 +140,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Analyzer.cs" />
+    <Compile Include="DatabaseSelection.xaml.cs">
+      <DependentUpon>DatabaseSelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Places.cs" />
     <Compile Include="Model\Points.cs" />
     <Compile Include="Model\Review.cs" />
@@ -147,6 +150,10 @@
     <Compile Include="RnetInstance.cs" />
     <Compile Include="SentimentAnalysis.cs" />
     <Compile Include="TripDB.cs" />
+    <Page Include="DatabaseSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

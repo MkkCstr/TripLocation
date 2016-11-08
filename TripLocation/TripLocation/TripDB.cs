@@ -14,6 +14,78 @@ namespace TripLocation
     {
         public TripDB() { }
 
+        public List<string> showDatabase(string db)
+        {
+            List<string> result = new List<string>();
+
+            MySqlConnection conn = null;
+            MySqlCommand cmd = null;
+            MySqlDataReader reader = null;
+            try
+            {
+                conn = new MySqlConnection(db);
+                cmd = new MySqlCommand("SHOW DATABASES;", conn);
+
+                conn.Open();
+
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string row = "";
+                    for (int i = 0; i < reader.FieldCount; i++)
+                        row += reader.GetValue(i).ToString() + ", ";
+                    result.Add(row);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message));
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (conn != null) conn.Close();
+            }
+            return result;
+        }
+
+
+        public List<string> showTables(string db)
+        {
+            List<string> result = new List<string>();
+
+            MySqlConnection conn = null;
+            MySqlCommand cmd = null;
+            MySqlDataReader reader = null;
+            try
+            {
+                conn = new MySqlConnection(db);
+                cmd = new MySqlCommand("SHOW TABLES;", conn);
+
+                conn.Open();
+
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string row = "";
+                    for (int i = 0; i < reader.FieldCount; i++)
+                        row += reader.GetValue(i).ToString() + ", ";
+                    result.Add(row);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message));
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+                if (conn != null) conn.Close();
+            }
+            return result;
+        }
         /// <summary>
         /// Prendre tout les places depuis la base de donnée
         /// </summary>

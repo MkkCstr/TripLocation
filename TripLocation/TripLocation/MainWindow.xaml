@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TripLocation"
         x:Class="TripLocation.MainWindow"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="400" Width="180">
     <Grid>
-        <Button x:Name="Start" Content="Button" HorizontalAlignment="Left" Height="30" Margin="420,28,0,0" VerticalAlignment="Top" Width="87" Click="Start_Click"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="40" Margin="420,63,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="87"/>
+        <TextBox x:Name="tb_IP" HorizontalAlignment="Left" Height="30" Margin="20,110,0,0" TextWrapping="Wrap" Text="Nom ou IP de l'hôte" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tb_user" HorizontalAlignment="Left" Height="30" Margin="20,160,0,0" TextWrapping="Wrap" Text="Utilisateur" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tb_mdp" HorizontalAlignment="Left" Height="30" Margin="20,210,0,0" TextWrapping="Wrap" Text="Mot de passe" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tb_port" HorizontalAlignment="Left" Height="30" Margin="20,260,0,0" TextWrapping="Wrap" Text="Port" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="button_connect" Content="se connecter" HorizontalAlignment="Left" Height="30" Margin="20,310,0,0" VerticalAlignment="Top" Width="120" Click="button_connect_Click"/>
     </Grid>
 </Window>

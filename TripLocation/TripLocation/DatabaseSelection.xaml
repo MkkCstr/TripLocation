@@ -8,13 +8,13 @@
         Title="DatabaseSelection" Height="250" Width="350">
     <Grid>
         <ComboBox x:Name="cb_dbselect" HorizontalAlignment="Left" Height="30" Margin="155,12,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="cb_dbselect_SelectionChanged"/>
-        <ComboBox x:Name="cb_place" HorizontalAlignment="Left" Height="31" Margin="155,47,0,0" VerticalAlignment="Top" Width="140" IsEditable="False" IsEnabled="False"/>
-        <ComboBox x:Name="cb_author" HorizontalAlignment="Left" Height="31" Margin="155,83,0,0" VerticalAlignment="Top" Width="140" IsEditable="False" IsEnabled="False"/>
-        <ComboBox x:Name="cb_review" HorizontalAlignment="Left" Height="31" Margin="155,119,0,0" VerticalAlignment="Top" Width="140" IsEditable="False" IsEnabled="False"/>
+        <ComboBox x:Name="cb_place" HorizontalAlignment="Left" Height="31" Margin="155,47,0,0" VerticalAlignment="Top" Width="140" IsEditable="False" IsEnabled="False" SelectionChanged="cb_place_SelectionChanged"/>
+        <ComboBox x:Name="cb_author" HorizontalAlignment="Left" Height="31" Margin="155,83,0,0" VerticalAlignment="Top" Width="140" IsEditable="False" IsEnabled="False" SelectionChanged="cb_author_SelectionChanged"/>
+        <ComboBox x:Name="cb_review" HorizontalAlignment="Left" Height="31" Margin="155,119,0,0" VerticalAlignment="Top" Width="140" IsEditable="False" IsEnabled="False" SelectionChanged="cb_review_SelectionChanged"/>
         <TextBlock x:Name="tbck_dbSelect" HorizontalAlignment="Left" Height="30" Margin="10,12,0,0" TextWrapping="Wrap" Text="Database" VerticalAlignment="Top" Width="140" FontWeight="Bold" TextAlignment="Center"/>
         <TextBlock x:Name="tbck_place" HorizontalAlignment="Left" Height="30" Margin="10,48,0,0" TextWrapping="Wrap" Text="Place table" VerticalAlignment="Top" Width="140" FontWeight="Bold" TextAlignment="Center"/>
         <TextBlock x:Name="tbck_author" HorizontalAlignment="Left" Height="30" Margin="10,84,0,0" TextWrapping="Wrap" Text="Author table" VerticalAlignment="Top" Width="140" FontWeight="Bold" TextAlignment="Center"/>
         <TextBlock x:Name="tbck_review" HorizontalAlignment="Left" Height="30" Margin="10,120,0,0" TextWrapping="Wrap" Text="Review table" VerticalAlignment="Top" Width="140" FontWeight="Bold" TextAlignment="Center"/>
-        <Button x:Name="button_doIt" Content="Button" HorizontalAlignment="Center" Height="41" Margin="0,170,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="button_doIt" Content="Button" HorizontalAlignment="Center" Height="41" Margin="0,170,0,0" VerticalAlignment="Top" Width="120" Click="button_doIt_Click"/>
     </Grid>
 </Window>

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TripLocation.Model;
 
 namespace TripLocation
 {
@@ -21,6 +22,10 @@ namespace TripLocation
     {
         private List<string> DbSelect = new List<string>();
         private string connection;
+        private string newConnection;
+        private string tbl_name_place;
+        private string tbl_name_author;
+        private string tbl_name_review;
 
         public DatabaseSelection(List<string> dblist, string con)
         {
@@ -39,7 +44,7 @@ namespace TripLocation
             ComboBox cmb = (ComboBox)sender;
             string selectedItem = cmb.SelectedItem.ToString();
             TripDB tripdb = new TripDB();
-            string newConnection = connection + "database=" + selectedItem;
+            newConnection = connection + "database=" + selectedItem;
             List<string> tableList = tripdb.showTables(newConnection);
             setComboBoxdata(cb_place, tableList);
             setComboBoxdata(cb_author, tableList);
@@ -56,6 +61,41 @@ namespace TripLocation
                 cb.Items.Add(data[i]);
                 
             }
+        }
+
+        private void cb_place_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            string selectedItem = cmb.SelectedItem.ToString();
+            tbl_name_place = selectedItem;
+        }
+
+        private void cb_author_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            string selectedItem = cmb.SelectedItem.ToString();
+            tbl_name_author = selectedItem;
+        }
+
+        private void cb_review_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            string selectedItem = cmb.SelectedItem.ToString();
+            tbl_name_review = selectedItem;
+        }
+
+        private void button_doIt_Click(object sender, RoutedEventArgs e)
+        {
+            string sqlrequete = "Select avg(rev.note) as AVG, loc.longitude, loc.latitude"
+            + " From "+ tbl_name_review + " as rev JOIN "+ tbl_name_author +" as aut On rev.idauteur = aut.memberID JOIN "+tbl_name_place+" as loc ON rev.idplace = loc.id"
+            + " Where aut.location != \"\""
+            + " Group by rev.idplace";
+
+            TripDB trip = new TripDB();
+            HashSet<TableInfo> myTable = trip.getTable(newConnection, sqlrequete);
+
+            RnetInstance rnet = new RnetInstance();
+            rnet.runScript(myTable);
         }
     }
 }

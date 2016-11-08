@@ -83,7 +83,6 @@ namespace TripLocation
                 if(dblist.Count > 0)
                 {
                     DatabaseSelection ds = new DatabaseSelection(dblist, db);
-                    ds.setConnection(db);
                     ds.Show();
                     this.Close();
                 }

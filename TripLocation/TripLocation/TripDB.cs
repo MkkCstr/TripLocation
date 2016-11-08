@@ -34,7 +34,7 @@ namespace TripLocation
                 {
                     string row = "";
                     for (int i = 0; i < reader.FieldCount; i++)
-                        row += reader.GetValue(i).ToString() + ", ";
+                        row += reader.GetValue(i).ToString();
                     result.Add(row);
                 }
             }
@@ -71,7 +71,7 @@ namespace TripLocation
                 {
                     string row = "";
                     for (int i = 0; i < reader.FieldCount; i++)
-                        row += reader.GetValue(i).ToString() + ", ";
+                        row += reader.GetValue(i).ToString();
                     result.Add(row);
                 }
             }
